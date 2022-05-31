@@ -1,6 +1,6 @@
 ---
-title: "Lauterjung - Einfluss internationaler und ausländischer Mobilität"
-author: "Tobias Lauterjung"
+title: "Einfluss internationaler und ausländischer Mobilität"
+author: "Tobias"
 date: "12 1 2022"
 output: html_document
 bibliography: "~/lfpma20-master/Covid19_Hausarbeit/bib/literatur.bib"
