@@ -1,10 +1,9 @@
 ---
 title: "Lauterjung - Einfluss internationaler und ausländischer Mobilität"
-author: "Tobias Lauterjung"
+author: "Tobias L."
 date: "12 1 2022"
 output: html_document
 bibliography: "~/lfpma20-master/Covid19_Hausarbeit/bib/literatur.bib"
-
 
 ---
 
@@ -42,8 +41,6 @@ polity_V_test_3 <- polity_V_covid_merged_freedom %>% unnest("Cambridge_Data") %>
                                                                                       
 polity_V_test_4 <- merge.data.frame(polity_V_test_2, polity_V_test_3)
 
-
-
 MaCon <- polity_V_covid_merged_Nicole
 
 MaCon_1 <- MaCon %>% select(`data`, `country`) %>% unnest("data")
@@ -72,35 +69,22 @@ zahlen_staedtetourismus_weltweit <- readRDS("~/lfpma20-master/Datensatzaufbereit
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-Bsp für Zotero Link [@Weltgesundheitsorganisation:2020]
-
-
-
-
-
-
 ```{r}
 
 FlugdatenDiagramm<-Flugdaten%>% mutate(num=1:n())%>% filter(num<181)
 FlugdatenDiagramm%>% ggplot(aes(x=date, y=`Number of flights`))+ geom_smooth(colour="black", se=FALSE)+ xlab("Datum") + ggtitle("Internationaler Flugverkehr 2020") + ylab("Anzahl der Flüge") 
-
 ```
 
-
 TouristcontriesTop10%>% ggplot(aes(x=Date, y=`confirmed`))+ geom_smooth(colour="deeppink1", se=FALSE)+ xlab("Datum") + ggtitle("Verlauf Infektionszahlen in den USA 2020") + ylab("Anzahl der bestätigten Corona Infektionen") + scale_y_continuous(limits = c(0, 8000000), breaks = seq(0, 8000000, by = 1000000))
-
 
 #### Internationale Reisekontrollen
 Mit dem Status als Pandemie geht einher, dass das Coronavirus nicht lokal begrenzt ist, sondern sich global ausbreitet. 
 
 
 ```{r Internationale Reisekontrollen 2020}
-
 polity_V_test_4%>% group_by (`C8_International travel controls`) %>%  ggplot(aes(x=Date, y=`confirmed`))+ geom_smooth(colour="black", se=FALSE)+  xlab("Datum") + ggtitle("Internationale Reisekontrollen 2020 I") + ylab("Infektionen") + facet_wrap(~ `C8_International travel controls`, nrow=4) 
 
 polity_V_test_4%>% group_by (`C8_International travel controls`) %>%  ggplot(aes(x=Date, y=`C8_International travel controls`))+ geom_smooth(colour="black", se=TRUE)+  xlab("Datum") + ggtitle("Internationale Reisekontrollen 2020 II") + ylab("Infektionen") + scale_y_continuous(limits = c(0, 4), breaks = seq(0, 4, by = 1)) 
-
 
 ```
 
@@ -113,21 +97,13 @@ Länder%>% ggplot(aes(x=num, y=`Anzahl der Ankünftein Tausend`))+ geom_point()+
 
 Länder<-tourismusdaten_laender_weltweit%>% mutate(num=1:n())%>% filter(num>5, num<11)
 Länder%>% ggplot(aes(x=num, y=`Anzahl der Ankünftein Tausend`))+ geom_point()+  xlab("Rang") + ggtitle("Einreisen in die beliebsten Urlausbländer 2019 II") + ylab("Anzahl der Ankünfte in Tausend")+ facet_wrap(~ `Land`, nrow=4)
-
 ```
-
-
-
 
 ```{r}
 
 TouristcontriesTop10<-polity_V_test_4%>% filter(iso3c== c("CHN", "THA", "USA","DEU","GBR","TUR","FRA", "ITA", "MEX", "ESP"))
 TouristcontriesTop10%>% ggplot(aes(x=Date, y=`C8_International travel controls`, colour=country))+ geom_smooth(se=FALSE)+  xlab("Datum") + ggtitle("Coronamaßnahmen der beliebtesten Urlaubsländer 2020") + ylab("Maßnahmen")+ scale_y_continuous(limits = c(0, 4), breaks = seq(0, 4, by = 1))
-
 ```
-
-
-
 
 ```{r Verlauf Infektionszahlen beliebtester Urlaubsländer + Einzelgrafik für USA da Ausreißer}
 TouristcontriesTop10<-polity_V_test_4%>% filter(iso3c== c("CHN", "THA", "USA","DEU","GBR","TUR","FRA", "ITA", "MEX", "ESP"))
@@ -136,6 +112,7 @@ TouristcontriesTop10%>% ggplot(aes(x=Date, y=`confirmed`, colour=country))+ geom
 TouristcontriesTop10<-polity_V_test_4%>% filter(iso3c== c("USA"))
 TouristcontriesTop10%>% ggplot(aes(x=Date, y=`confirmed`))+ geom_smooth(colour="deeppink1", se=FALSE)+ xlab("Datum") + ggtitle("Verlauf Infektionszahlen in den USA 2020") + ylab("Anzahl der bestätigten Corona Infektionen") + scale_y_continuous(limits = c(0, 8000000), breaks = seq(0, 8000000, by = 1000000))
 ```
+
 ```{r Population beliebtester Urlaubsländer}
 
 TouristcontriesTop10<-polity_V_test_4%>% filter(iso3c== c("CHN", "THA", "USA","DEU","GBR","TUR","FRA", "ITA", "MEX", "ESP"))
@@ -145,15 +122,11 @@ TouristcontriesTop10<-polity_V_test_4%>% filter(iso3c== c("THA", "DEU","GBR","TU
 TouristcontriesTop10%>% ggplot(aes(x=population, y=`year`))+ geom_point(se=FALSE)+  xlab("Einwohner") + ggtitle("Ohne China und USA") + ylab("Jahr") + facet_wrap(~ `country`, nrow=6)
 ```
 
-
-
 ```{r}
 Städte<-zahlen_staedtetourismus_weltweit%>% mutate(num=1:n())%>% filter(num<11)
 Städte%>% ggplot(aes(x=Stadt, y=`Besucher (2018)`))+ geom_point()+  xlab("Stadt") + ggtitle("Städte mit den höchsten Besucherzahlen 2019") + ylab("Anzahl der Besucher")
 ```
 
-
-gibt kein VAE!
 ```{r Malaysia und Singapur}
 StädteTopBesucherMaßnahmen<-polity_V_test_4%>% filter(iso3c== c("SGP", "MYS"))
 StädteTopBesucherMaßnahmen%>% ggplot(aes(x=Date, y=`C8_International travel controls`, colour=country))+ geom_smooth(se=FALSE)+  xlab("Datum") + ggtitle("Coronamaßnahmen von Malaysia und Singapur 2020") + ylab("Maßnahmen")+ scale_y_continuous(limits = c(0, 4), breaks = seq(0, 4, by = 1)) 
@@ -167,8 +140,6 @@ TouristcontriesTop10%>% ggplot(aes(x=population, y=`year`))+ geom_point(se=FALSE
 TouristcontriesTop10<-polity_V_test_4%>% filter(iso3c== c("SGP"))
 TouristcontriesTop10%>% ggplot(aes(x=population, y=`year`))+ geom_point(se=FALSE)+  xlab("Einwohner") + ggtitle("Bevölkerung von Singapur") + ylab("Jahr") + facet_wrap(~ `country`, nrow=4) 
 ```
-
-
 ```{r Coronamaßnahmen ausgewählter Asiatischer und Europäischer Länder 2020}
 OstasienMaßnahmen<-polity_V_test_4%>% filter(iso3c== c("JPN", "IDN", "KHM","TWN","VNM","MMR","MNG", "IND"))
 OstasienMaßnahmen%>% ggplot(aes(x=Date, y=`C8_International travel controls`, colour=country))+ geom_smooth(se=FALSE)+  xlab("Datum") + ggtitle("Coronamaßnahmen ausgewählter Asiatischer Länder 2020") + ylab("Maßnahmen") + scale_y_continuous(limits = c(0, 4), breaks = seq(0, 4, by = 1))
@@ -210,17 +181,13 @@ EuropaMaßnahmen<-polity_V_test_4%>% filter(iso3c== c("POL", "ROU","SWE", "PRT",
 EuropaMaßnahmen%>% ggplot(aes(x=population, y=`year`))+ geom_point(se=FALSE)+  xlab("Einwohner") + ggtitle("Ohne Russland") + ylab("Jahr") + facet_wrap(~ `country`, nrow=4)
 ```
 
-
-
 ```{r Coronamaßnahmen ausgewählter Asiatischer und Europäischer Länder 2020}
 OstasienMaßnahmen<-polity_V_test_4%>% filter(iso3c== c("JPN", "IDN", "KHM","TWN","VNM","MMR","MNG", "IND"))
 OstasienMaßnahmen%>% ggplot(aes(x=Date, y=`C8_International travel controls`, colour=country))+ geom_smooth(se=FALSE)+  xlab("Datum") + ggtitle("Coronamaßnahmen ausgewählter Asiatischer Länder 2020") + ylab("Maßnahmen") + scale_y_continuous(limits = c(0, 4), breaks = seq(0, 4, by = 1))
 
 EuropaMaßnahmen<-polity_V_test_4%>% filter(iso3c== c("POL", "SWE", "PRT","NLD","RUS","BEL","CZE", "ROU"))
 EuropaMaßnahmen%>% ggplot(aes(x=Date, y=`C8_International travel controls`, colour=country))+ geom_smooth(se=FALSE)+ xlab("Datum") + ggtitle("Coronamaßnahmen ausgewählter Europäischer Länder 2020") + ylab("Anzahl der bestätigten Corona Infektionen") + scale_y_continuous(limits = c(0, 4), breaks = seq(0, 4, by = 1)) 
-
 ```
-
 
 ```{r Coronamaßnahmen Kontinente 2020}
 
@@ -231,30 +198,3 @@ Kontinente<-polity_V_test_4%>% filter(Continent_Name== c("Africa", "South Americ
 Kontinente%>% ggplot(aes(x=Date, y=`confirmed`, colour=`Continent_Name`))+ geom_smooth( se=FALSE)+  xlab("Datum") + ggtitle("Verlauf Infektionszahlen ausgewählter Kontinente 2020") + ylab("Maßnahmen")
 
 ```
-
-
-
-
-
-Kontinente<-polity_V_test_4%>% filter(iso3c== c("KHM","JPN","VNM","MMR", "MNG"))
-
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r \\label{fig:Erstens}}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
