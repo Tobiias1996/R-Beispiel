@@ -1,6 +1,11 @@
 ---
+<<<<<<< HEAD:R Einfluss internationaler und ausländischer Mobilität.R
 title: "Lauterjung - Einfluss internationaler und ausländischer Mobilität"
 author: "Tobias L."
+=======
+title: "Einfluss internationaler und ausländischer Mobilität"
+author: "Tobias"
+>>>>>>> 7def6147466d457b928043f0da339d4e113cd548:R Einfluss internationaler und ausländischer Mobilität.Rmd
 date: "12 1 2022"
 output: html_document
 bibliography: "~/lfpma20-master/Covid19_Hausarbeit/bib/literatur.bib"
